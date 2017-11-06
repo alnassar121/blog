@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>post items</title>
+</head>
+<body>
+	{% for item in post_items %}
+	<ul>
+		<li>{{item.title}}</li>
+		<li>{{item.content}}</li>
+		<li>{{item.id}}</li>
+	</ul>
+	{% endfor %}
+</body>
+</html>
