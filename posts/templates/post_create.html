@@ -1,0 +1,19 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<ul>
+		<form action="{% url 'create' %}" method="POST">
+			{% csrf_token %}
+		<li>{{form.as_p}}</li>
+		<input type="submit" name="create">
+		</form>
+		
+		
+	</ul>
+
+</body>
+</html>

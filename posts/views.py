@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Post
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
+from .forms import PostForm
+from django.contrib import messages
 
 
 def post_home(request):
@@ -37,3 +39,40 @@ def post_detail(request, post_id):
 		"item": Item,
 	}
 	return render(request, "detail.html", context)
+
+def post_create(request):
+	form = PostForm(request.POST or None)
+	if form.is_valid():
+		form.save()
+		messages.success(request, "wooow nice")
+		return redirect("list")
+	context= {
+		"form": form
+
+	}
+	return render(request, 'post_create.html', context)
+
+def post_update(request, post_id):
+	item = Post.objects.get(id=post_id)
+	form = PostForm(request.POST or None, instance=item)
+	if form.is_valid():
+		form.save()
+		messages.success(request, "you just update")
+		return redirect("list")
+	context= {
+		"form": form,
+		"item": item,
+
+	}
+	return render(request, 'post_update.html', context)
+
+def post_delete(request, Post_id):
+	Post.objects.get(id=post_id).delete()
+	messages.success(request, "you just delete")
+	return redirect("list")
+
+
+	return render(request, 'post_create.html', context)
+
+
+

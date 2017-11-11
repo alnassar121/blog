@@ -4,11 +4,21 @@
 	<title>post items</title>
 </head>
 <body>
+	{% if messages %}
+	<ul class="messages">
+		{% for message in messages %}
+		<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+		{% endfor %}
+	</ul>
+	{% endif %}
+	
 	{% for item in post_items %}
+
 	<ul>
-		<li>{{item.title}}</li>
+		<a href="{{item.get_detail_url}}"><li>{{item.title}}</li>
+
 		<li>{{item.content}}</li>
-		<li>{{item.id}}</li>
+		<li>{{item.id}}</li></a>
 	</ul>
 	{% endfor %}
 </body>
